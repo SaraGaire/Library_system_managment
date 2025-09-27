@@ -1,0 +1,47 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Library Self-Service</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+<h1>Library Self-Service</h1>
+<div id="user"></div>
+</header>
+
+
+<section id="login">
+<h2>Sign in</h2>
+<form id="loginForm">
+<input required placeholder="University ID" name="universityId" />
+<input required placeholder="Full name" name="name" />
+<input placeholder="Email (optional)" name="email" />
+<button>Sign in</button>
+</form>
+</section>
+
+
+<section id="app" class="hidden">
+<div class="toolbar">
+<input id="q" placeholder="Search books by title..." />
+<button id="searchBtn">Search</button>
+</div>
+<div class="grid">
+<div>
+<h3>Books</h3>
+<ul id="books"></ul>
+</div>
+<div>
+<h3>My Loans</h3>
+<ul id="loans"></ul>
+</div>
+</div>
+</section>
+
+
+<script src="app.js"></script>
+</body>
+</html>
