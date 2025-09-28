@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+mongo:
+image: mongo:7
+restart: unless-stopped
+ports: ["27017:27017"]
+volumes:
+- mongo_data:/data/db
+api:
+build:
+context: ./api-java
+dockerfile: Dockerfile
+environment:
+- MONGO_URI=mongodb://mongo:27017/library
+- LIBRARY_API_PORT=8080
+- API_KEY=${API_KEY}
+- MAX_LOAN_DAYS=${MAX_LOAN_DAYS:-20}
+- JWT_SECRET=${JWT_SECRET}
+- OIDC_ISSUER=${OIDC_ISSUER}
+- OIDC_CLIENT_ID=${OIDC_CLIENT_ID}
+- OIDC_AUDIENCE=${OIDC_AUDIENCE}
+depends_on: [mongo]
+ports: ["8080:8080"]
+web:
+image: nginx:stable-alpine
+volumes:
+- ./web:/usr/share/nginx/html:ro
+ports: ["8000:80"]
+depends_on: [api]
+volumes:
+mongo_data:
